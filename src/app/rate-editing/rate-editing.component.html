@@ -1,0 +1,160 @@
+<nz-breadcrumb >
+   <nz-breadcrumb-item>
+      <a href="javascript:;" [routerLink]="['/admin/insurance-management']" >保险管理</a>
+   </nz-breadcrumb-item>
+   <nz-breadcrumb-item>费率编辑</nz-breadcrumb-item>
+ </nz-breadcrumb>
+<div class="row">
+	<div class="col-md-12" style="padding:30px" id="endit">
+		<div class="col-md-12">费率组合</div> 
+		<div class="col-md-12 form-horizontal">
+			<div class="form-group col-md-6">
+				<label for="" class="text-danger col-md-3 control-label">性别:</label>
+				<div class="col-md-7">
+					<nz-select style="width:100%;" [nzMode]="'multiple'"
+				      [nzPlaceHolder]="'请选择性别'"
+				      [(ngModel)]="selectedGenderOption"
+				      [nzNotFoundContent]="'无法找到'"
+				      [nzDisabled]="flag" >
+				      <nz-option
+				        *ngFor="let option of genderOptions"
+				        [nzLabel]="option.label"
+				        [nzValue]="option.value"
+				        [nzDisabled]="option.disabled" >
+				      </nz-option>
+				    </nz-select>
+				</div>
+				<div class="col-md-2" style="float:left;margin-top:3px;">
+					<input type="checkbox" name="" [(ngModel)]='genderCheckbox'>
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="" class="text-danger col-md-4 control-label">职业等级:</label>
+				<div class="col-md-6">
+					<nz-select style="width:100%;" [nzMode]="'multiple'"
+				      [nzPlaceHolder]="'请选择职业等级'"
+				      [(ngModel)]="selectedGradeleOption"
+				      [nzNotFoundContent]="'无法找到'" 
+				      [nzDisabled]="flag">
+				      <nz-option
+				        *ngFor="let option of GradeOptions"
+				        [nzLabel]="option.label"
+				        [nzValue]="option.value"
+				        [nzDisabled]="option.disabled" >
+
+				      </nz-option>
+				    </nz-select>
+				</div>
+				<div class="col-md-2" style="float:left;margin-top:3px;">
+					<input type="checkbox" name="" id="" [(ngModel)]='gradeCheckbox'>
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="" class="text-danger col-md-3 control-label">社保:</label>
+				<div class="col-md-7">
+					<nz-select style="width:100%;" [nzMode]="'multiple'"
+				      [nzPlaceHolder]="'请选择社保'"
+				      [(ngModel)]="selectedSocialOption"
+				      [nzNotFoundContent]="'无法找到'"
+				      [nzDisabled]="flag"  >
+				      <nz-option
+				        *ngFor="let option of socialOptions"
+				        [nzLabel]="option.label"
+				        [nzValue]="option.value"
+				        [nzDisabled]="option.disabled" >
+
+				      </nz-option>
+				    </nz-select>
+				</div>
+				<div class="col-md-2" style="float:left;margin-top:3px;">
+					<input type="checkbox" name="" id="" [(ngModel)]='socialCheckbox'>
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="" class="text-danger col-md-4 control-label">保障期限:</label>
+				<div class="col-md-6">
+					<nz-select style="width:100%;" [nzMode]="'multiple'"
+				      [nzPlaceHolder]="'请选择保障期限'"
+				      [(ngModel)]="selectedPeriodOption"
+				      [nzNotFoundContent]="'无法找到'" 
+				      [nzDisabled]="flag">
+				      <nz-option
+				        *ngFor="let option of periodOptions"
+				        [nzLabel]="option[1]"
+				        [nzValue]="option[0]"
+				        [nzDisabled]="option.disabled" >
+
+				      </nz-option>
+				    </nz-select>
+				</div>
+				<div class="col-md-2" style="float:left;margin-top:3px;">
+					<input type="checkbox" name="" id=""   [(ngModel)]='periodCheckbox'>
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="" class="text-danger col-md-3 control-label">年龄:</label>
+				<div class="col-md-3">
+					<input required type="number" class="form-control" [disabled]="flag" [(ngModel)]='age_min'>
+				</div>
+				<div class="col-md-1 text-center" style="line-height:34px">
+					至
+				</div>
+				<div class="col-md-3">
+					<input required type="number" class="form-control" [disabled]="flag" [(ngModel)]='age_max'>
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="" class="text-danger col-md-4 control-label">缴费年限:</label>
+				<div class="col-md-6">
+					<nz-select style="width:100%;" [nzMode]="'multiple'"
+				      [nzPlaceHolder]="'请选择缴费年限'"
+				      [(ngModel)]="selectedPaymentOption"
+				      [nzNotFoundContent]="'无法找到'" 
+				      [nzDisabled]="flag">
+				      <nz-option
+				        *ngFor="let option of paymentOptions"
+				        [nzLabel]="option[1]"
+				        [nzValue]="option[0]"
+				        [nzDisabled]="option.disabled" >
+				      </nz-option>
+				    </nz-select>
+				</div>
+				<div class="col-md-2" style="float:left;margin-top:3px;">
+					<input type="checkbox" name="" id="" [(ngModel)]='paymentCheckbox'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group col-md-4">
+			<button class="btn btn-primary" (click)="endit()">编辑</button>
+			<button class="btn btn-primary" (click)="disabled()">保存</button>
+			<a href="{{DownloadUrl}}" download="ratio.xls"  class="btn btn-primary" >下载</a>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12" style="padding:30px" id="endit">
+		<div class="col-md-12">费率表</div> 
+		<div class="row" >
+			<div class="col-md-2">
+			    <input type="file" id="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" />
+			</div>
+			<div class="col-md-2">
+				 <button (click)='uploadFile()' class="btn btn-primary">上传</button>
+			</div>
+			<div class="col-md-2">
+				 <button (click)='dowloadFile()' class="btn btn-primary">下载</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" >
+	<div class="col-md-12">
+		<div class="form-group col-md-2">
+			<button class="btn btn-primary" (click)="submit_()" >保存</button>
+		</div>
+	</div>
+</div>

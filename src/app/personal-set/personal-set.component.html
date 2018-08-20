@@ -1,0 +1,23 @@
+<nz-breadcrumb>
+   <nz-breadcrumb-item>设置</nz-breadcrumb-item>
+   <nz-breadcrumb-item>个人设置</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="row">
+	<div class="col-md-12" style="padding:30px;">
+		<div class="col-md-6 form-horizontal">
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">个人账号:</label>
+				<div class="col-md-9 preTitle"><p >{{username}}</p></div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">姓名:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="comp_name" [(ngModel)]='first_name'>
+				</div>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" (click)="submit_1()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>

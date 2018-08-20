@@ -1,0 +1,76 @@
+ <nz-breadcrumb>
+    <nz-breadcrumb-item>业务管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+		<a href="javascript:;" [routerLink]="['/admin/ash-management']">小智管理</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>分析详情</nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-card style="width:100%;" nzNoHovering='true'>
+    <ng-template #body>
+      <div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+      	<div class="col-md-12" style="color:#101010;font-size:20px;margin-bottom:20px;">问题：</div>
+      	<div class="col-md-12">
+      		<nz-table #nzTable [nzDataSource]="questionData" [nzPageSize]="10" [nzIsPagination]="false" [nzBordered]="true">
+      		      <thead nz-thead>
+      		        <tr>
+      		          <th nz-th><span>问题</span></th>
+      		          <th nz-th><span>答案</span></th>
+      		        </tr>
+      		      </thead>
+      		      <tbody nz-tbody>
+      		        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+      		          <td nz-td>{{data.question}}</td>
+      		          <td nz-td>{{data.answer}}</td>
+      		        </tr>
+      		      </tbody>
+      		    </nz-table>
+      	</div>
+      </div>
+      <div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+        <div class="col-md-12" style="color:#101010;font-size:20px;margin-bottom:20px;">财务分析表：</div>
+        <div class="col-md-12">
+          <nz-table #nzTable3  [nzDataSource]="questionData" [nzPageSize]="10" [nzIsPagination]="false" [nzBordered]="true">
+              <thead nz-thead>
+                <tr>
+                  <th nz-th><span>收入(元)</span></th>
+                  <th nz-th><span>支出(元)</span></th>
+                  <th nz-th><span>结余(元)</span></th>
+                </tr>
+              </thead>
+              <tbody nz-tbody>
+                <tr nz-tbody-tr >
+                  <td nz-td>{{income_year}}</td>
+                  <td nz-td>{{expense_year}}</td>
+                  <td nz-td>{{surplus}}</td>
+                </tr>
+              </tbody>
+          </nz-table>
+        </div>
+      </div>
+      <div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+        <div class="col-md-12" style="color:#101010;font-size:20px;margin-bottom:20px;">风险预算：</div>
+        <div class="col-md-12">
+          <nz-table #nzTable2 [nzDataSource]="suggest_policyData" [nzPageSize]="10" [nzIsPagination]="false" [nzBordered]="true">
+              <thead nz-thead>
+                <tr>
+                  <th nz-th><span>成员</span></th>
+                  <th nz-th><span>人寿险</span></th>
+                  <th nz-th><span>意外险</span></th>
+                  <th nz-th><span>重疾险</span></th>
+                  <th nz-th><span>医疗险</span></th>
+                </tr>
+              </thead>
+              <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable2.data">
+                  <td nz-td>{{data.division}}</td>
+                  <td nz-td>{{data.life}}</td>
+                  <td nz-td>{{data.acc}}</td>
+                  <td nz-td>{{data.ill}}</td>
+                  <td nz-td>{{data.med}}</td>
+                </tr>
+              </tbody>
+          </nz-table>
+        </div>
+      </div>
+    </ng-template>
+</nz-card>

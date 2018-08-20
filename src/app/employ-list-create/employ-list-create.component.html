@@ -1,0 +1,54 @@
+<nz-breadcrumb >
+   <nz-breadcrumb-item>
+   	 <a href="javascript:;" [routerLink]="['/admin/employee-list']">员工设置</a>
+   	</nz-breadcrumb-item>
+   <nz-breadcrumb-item>员工管理</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="row">
+	<div class="col-md-12" style="padding:20px">
+		<div class="col-md-6 form-horizontal">
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">登录账号:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="username" [(ngModel)]='username'>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">姓名:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="comp_name" [(ngModel)]='first_name'>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">密码:</label>
+				<div class="col-md-9">
+					<input type="password" class="form-control" name="password" [(ngModel)]='password'>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">状态:</label>
+				<div class="col-md-9">
+					<select name="" id="select" class="form-control" (change)="change_()" >>
+		                <option  value="1" >正常</option>
+		                <option  value="0" >禁用</option>
+		             </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">状态:</label>
+				<div class="col-md-9">
+					<select name="" id="select2" class="form-control" (change)="change_2()" >>
+		                <option  value="1" >管理员</option>
+		                <option  value="0" >普通员工</option>
+		             </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-9">
+					<button class="btn btn-primary" (click)=" sign == 'add' ?  submit_1() : submit_2()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

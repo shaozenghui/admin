@@ -1,0 +1,209 @@
+ <nz-breadcrumb >
+    <nz-breadcrumb-item>
+    	<a href="javascript:;" [routerLink]="['/admin/city-management']">城市管理</a>
+    </nz-breadcrumb-item>
+     <nz-breadcrumb-item>城市编辑</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<form class="col-md-12 form-horizontal" >
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">城市:</label>
+					<div class="col-md-6">
+						<select name="select" id="select" class="form-control" (change)="change_()" [(ngModel)]="bsc_city_id">
+							<option *ngFor='let item of cityList' [value]="item[0]" [id]='item[0]'>{{item[1]}}</option>
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 wrapperTitle">五险一金</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p class="smallTitle">个人</p>
+			<div class="col-md-12 form-horizontal" >
+					<div class="form-group col-md-6">
+						<label for="" class="text-danger col-md-6 control-label">养老保险:</label>
+						<div class="col-md-6">
+							<input type="number"  [(ngModel)]="yanglaobx"  class="form-control"  >
+						</div>
+					</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">医疗保险:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="yiliaobx"  class="form-control"  >
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">失业保险:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="shiyebx"  class="form-control"  >
+       
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">工伤保险:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="gongshangbx"  class="form-control"  >
+           
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">生育保险:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="shengyubx"  class="form-control" required   [rangeLength]="[1, 6]" >
+         
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">公积金:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="gongjijin_min"  class="form-control"  >
+             
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<p class="smallTitle">公司</p>
+			<div class="col-md-12 form-horizontal">
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">养老保险(公司):</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="yanglaobx_comp" class="form-control"  >
+              
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">医疗保险(公司):</label>
+					<div class="col-md-6">
+                    	<input type="number"  [(ngModel)]="yiliaobx_comp"  class="form-control"  >
+             
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">失业保险(公司):</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="shiyebx_comp" class="form-control" >
+            
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">工伤保险(公司):</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="gongshangbx_comp" class="form-control" >
+              		
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">生育保险(公司):</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="shengyubx_comp" class="form-control"  >
+              
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">公积金(公司):</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="gongjijin_comp_min"  class="form-control"  >
+              			 
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">城市最低平均值:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="average_min"  class="form-control"  >
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">城市最高平均值:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="average_max"  class="form-control"  >
+           
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">公积金城市最低平均值:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="fund_average_min"  class="form-control"  >
+              		
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">公积金城市最高平均值:</label>
+					<div class="col-md-6">
+						<input type="number"  [(ngModel)]="fund_average_max"  class="form-control"  >
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 wrapperTitle">城市医保简介</div>
+	</div>
+	<nz-tabset [nzTabPosition]="'top'"  [nzType]="'card'" [nzSelectedIndex]='nzSelectedIndex' (nzSelectedIndexChange)="nzSelectedIndexChange($event)" >
+      <nz-tab *ngFor="let tab of tabs">
+        <ng-template #nzTabHeading>
+           {{tab.med_insurance_type_name}}
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+    <div  id="tabs2">
+	    <div *ngFor="let tab of tabs2;let i = index" class="tabs2_list {{i == nzSelectedIndex ? 'block_' : 'default'}}" >
+		    <div class="row ">
+	    		<div class="col-md-12 form-horizontal">
+	    			<div class="form-group col-md-6">
+	    				<label for="" class="text-danger col-md-6 control-label">门诊报销:</label>
+	    				<div class="col-md-6">
+	    					<input type="number"  [(ngModel)]="tab.menzhenbaoxiao"  class="form-control"  >
+	    				</div>
+	    			</div>
+	    			<div class="form-group col-md-6">
+	    				<label for="" class="text-danger col-md-6 control-label">门诊报销起付线:</label>
+	    				<div class="col-md-6">
+	    					<input type="number"  [(ngModel)]="tab.menzhen_pay_standard"  class="form-control"  >
+	    				</div>
+	    			</div>
+	    			<div class="form-group col-md-6">
+	    				<label for="" class="text-danger col-md-6 control-label">住院报销:</label>
+	    				<div class="col-md-6">
+	    					<input type="number"  [(ngModel)]="tab.zhuyuanbaoxiao"  class="form-control"  >
+	    				</div>
+	    			</div>
+	    			<div class="form-group col-md-6">
+	    				<label for="" class="text-danger col-md-6 control-label">住院报销起付线:</label>
+	    				<div class="col-md-6">
+	    					<input type="number"  [(ngModel)]="tab.zhuyuan_pay_standard"  class="form-control"  >
+	    				</div>
+	    			</div>
+	    		</div>
+		    </div>
+		    <div class="row">
+		    	<div class="col-md-12 form-horizontal">
+		    		<div class="form-group col-md-6">
+		    			<label for="" class="text-danger col-md-6 control-label">微信小程序图片链接:</label>
+		    			<div class="col-md-6">
+		    				<input type="text"  [(ngModel)]="tab.wx_yibao_info"  class="form-control"  >      
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+	    	<umeditor [(ngModel)]="tab.yibao_info" 
+	          [config]="{UMEDITOR_HOME_URL:'./assets/umeditor/'}"
+	          [path]="'./assets/umeditor/'"
+	          [loadingTip]="'加载中..'"
+	          (onContentChange)="editonContentChange($event)" (onReady)="umReady($event)"  #full name='umeditor'>
+	  		</umeditor>
+	    </div>
+    </div>
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary"  (click)=' sign == "add" ?  submit_1() : submit_2()' id="btn">保存</button>
+		</div>
+	</div>
+
+</div>

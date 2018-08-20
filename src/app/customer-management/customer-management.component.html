@@ -1,0 +1,67 @@
+ <nz-breadcrumb >
+    <nz-breadcrumb-item>客户管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>客户管理</nz-breadcrumb-item>
+  </nz-breadcrumb>
+<nz-card style="width:100%;" nzNoHovering='true'>
+      <ng-template #body>
+        <div nz-row class="tablr_tit">
+          <div nz-col [nzSpan]="8">
+              <p class="title_">创建时间</p>
+              <div class="col-md-6" style="padding-left:0px">
+                  <input type="date" class="form-control" [(ngModel)]="_startDate" >
+              </div>
+              <div class="col-md-6">
+                 <input type="date" class="form-control" [(ngModel)]="_endDate" >
+              </div>
+             
+          </div>
+          <div nz-col [nzSpan]="4">
+              <p class="title_">公司名称</p>
+               <input [(ngModel)]="comp_value" class="form-control">
+          </div>
+          <div nz-col [nzSpan]="8">
+              <p class="title_">状态</p> 
+              <select name="" id="select" class="form-control" [(ngModel)]="status_name"  nz-col [nzSpan]="6">
+                <option  [value]="_option" >全部</option>
+                <option  value="1" >正常</option>
+                <option  value="0" >禁用</option>
+              </select>
+              <div nz-col [nzSpan]="6">
+                 <button nz-button [nzType]="'primary'" (click)="searchCustome()">
+                    <span>搜索</span>
+                  </button>
+              </div>
+               <div nz-col [nzSpan]="6">
+                 <button nz-button [nzType]="'primary'">
+                      <a href="javascript:;" [routerLink]="['/admin/customer-creat']" [queryParams]="{'sign':'add'}">添加</a>
+                  </button>
+              </div>
+          </div>
+        </div>
+        <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzShowSizeChanger]="true" [nzBordered]="true" [nzTotal]="_dataSet.length" nzShowTotal [(nzPageIndex)]="_current" (nzPageIndexChangeClick)='nzPageIndexChangeClick($event)' >
+          <thead nz-thead>
+            <tr>
+              <th nz-th><span>公司名称</span></th>
+              <th nz-th><span>客户数</span></th>
+              <th nz-th><span>登录账号</span></th>
+              <th nz-th><span>创建时间</span></th>
+              <th nz-th><span>状态</span></th>
+              <th nz-th><span>维护人员</span></th>
+              <th nz-th><span>状态</span></th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data" >
+              <td nz-td>{{data.name}}</td>
+              <td nz-td>{{data.nums_valid}}/{{data.customer_num}}</td>
+              <td nz-td>{{data.email}}</td>
+              <td nz-td>{{data.created_at}}</td>
+              <td nz-td>{{data.get_status_txt}}</td>
+              <td nz-td>{{data.updated_by}}</td>
+              <td nz-td><a href="javascript:;" [routerLink]="['/admin/customer-creat']" 
+              [queryParams]="{'id':data.id,'sign':'change'}">修改</a></td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </ng-template>
+</nz-card>

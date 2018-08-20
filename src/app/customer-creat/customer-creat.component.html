@@ -1,0 +1,77 @@
+<nz-breadcrumb>
+   <nz-breadcrumb-item>
+		 <a href="javascript:;" [routerLink]="['/admin/customer-management']">客户管理</a>
+   </nz-breadcrumb-item>
+   <nz-breadcrumb-item>客户信息</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="row">
+	<div class="col-md-12" style="padding:20px">
+		<div class="col-md-6 form-horizontal">
+			<div class="form-group" *ngIf="firstname_falg">
+				<label for="" class="text-danger col-md-3 control-label">管理员姓名:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="comp_name" [(ngModel)]='firstname' id="firstname">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">公司名称:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="comp_name" [(ngModel)]='comp_name' id="comp_name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">登录账号:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="username" [(ngModel)]='username' id="username">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">密码:</label>
+				<div class="col-md-9">
+					<input type="password" class="form-control" name="password" [(ngModel)]='password'>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">状态:</label>
+				<div class="col-md-9">
+					<select name="" id="select" class="form-control"  [(ngModel)]="status_name">
+		                <option  value="1" >正常</option>
+		                <option  value="0" >禁用</option>
+		             </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">下载状态:</label>
+				<div class="col-md-9">
+					<select name="" id="select" class="form-control"  [(ngModel)]="word_download_status">
+		                <option  value="1" >正常</option>
+		                <option  value="0" >禁用</option>
+		             </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">账号数:</label>
+				<div class="col-md-9">
+					<input type="number" class="form-control" min='1' name="num" [(ngModel)]='num'>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">开始日期:</label>
+				<div class="col-md-9">
+					<input type="date" class="form-control" [(ngModel)]="_startDate" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="text-danger col-md-3 control-label">结束日期:</label>
+				<div class="col-md-9">
+					 <input type="date" class="form-control" [(ngModel)]="_endDate" >
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-9">
+					<button class="btn btn-primary" (click)=" sign == 'add' ?  submit_1() : submit_2()" id="submit_">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

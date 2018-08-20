@@ -1,0 +1,109 @@
+ <nz-breadcrumb>
+    <nz-breadcrumb-item>业务管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+		<a href="javascript:;" [routerLink]="['/admin/policy-management']">保单咨询</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>保单详情</nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-card style="width:100%;" nzNoHovering='true'>
+    <ng-template #body>
+      <div class="row">
+      	<div class="col-md-12">
+      		<div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+
+         <nz-table #nzTable3  [nzDataSource]="questionData" [nzPageSize]="10" [nzIsPagination]="false" [nzBordered]="true">
+              <thead nz-thead>
+                <tr>
+                  <th nz-th><span>年收入(元)</span></th>
+                  <th nz-th><span>年支出(元)</span></th>
+                  <th nz-th><span>问题</span></th>
+                </tr>
+              </thead>
+              <tbody nz-tbody>
+                <tr nz-tbody-tr >
+                  <td nz-td>{{policyDetail.income_year}}</td>
+                  <td nz-td>{{policyDetail.expense_year}}</td>
+                  <td nz-td>{{policyDetail.question}}</td>
+                </tr>
+              </tbody>
+          </nz-table>
+      		</div>
+      		<div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+             <div class="col-md-12" style="color:#303030;line-height:70px;font-size:30px">上传的图片：</div>
+      			<div class="col-md-3" *ngFor="let item of consult">
+      				<img [src]="item" alt="" style="width:100%;">
+      			</div>
+      		</div>
+      		<div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+      			<div class="col-md-12" style="color:#303030;line-height:70px;font-size:30px">回复的内容：</div>
+      			<div class="col-md-12">
+      				<textarea name="" id="" style="padding:10px;border-radius:8px" cols="150" rows="10" [(ngModel)]="text_area"></textarea>
+      			</div>
+      		</div>
+      		<div class="row" style="color:#101010;font-size:20px;margin-bottom:20px;">
+      			<div class="col-md-4">
+      				<button nz-button [nzType]="'primary'" (click)="showModalMiddle()">
+                <span>选择经纪人</span>
+              </button>
+      			</div>
+            <div class="col-md-8" *ngIf="flag_">
+              <div class="col-md-6">公司名称：{{comName}}</div>
+              <div class="col-md-6">经纪人：  {{proName}}</div>
+            </div>
+      		</div>
+      	</div>
+      </div>
+      <nz-modal
+       [nzWrapClassName]="'vertical-center-modal'" 
+       [nzContent]="modalContent2" 
+       [nzVisible]="isVisibleMiddle" 
+       [nzTitle]="'选择经纪人'"
+       (nzOnCancel)="handleCancelMiddle($event)"
+       (nzOnOk)="handleOkMiddle($event)">
+        <ng-template #modalContent2>
+            <div class="row" style="line-height:34px;">
+                <label for="" class="control-label col-sm-3">公司名称：</label>
+                <div class="col-sm-8">
+                  <nz-select
+                    style="width: 300px;"
+                    nzAllowClear
+                    [(ngModel)]="comNameList_id"
+                    [nzShowSearch]="true" (nzOpenChange)="change_()">
+                    <nz-option
+                      *ngFor="let option of comNameList"
+                      [nzLabel]="option[1]"
+                      [nzValue]="option[0]"
+                      >
+                    </nz-option>
+                  </nz-select>
+                </div>
+            </div>
+            <div  class="row" style="line-height:34px;">
+                <label for="" class="control-label col-sm-3">经纪人：</label>
+                <div class="col-sm-8">
+                  <nz-select
+                    style="width: 300px;"
+                    nzAllowClear
+                    [(ngModel)]="proNameList_id"
+                    [nzShowSearch]="true">
+                    <nz-option
+                      *ngFor="let option of proNameList"
+                      [nzLabel]="option[1]"
+                      [nzValue]="option[0]"
+                      >
+                    </nz-option>
+                  </nz-select>
+                </div>    
+            </div>
+            <div class="row">
+              
+            </div>
+        </ng-template>
+      </nz-modal>
+      <div class="row">
+      	<div class="col-md-12">
+    			<button class="btn btn-primary" (click)="submit_()">发送</button>
+    		</div>
+      </div>
+    </ng-template>
+</nz-card>

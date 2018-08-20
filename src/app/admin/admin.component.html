@@ -1,0 +1,72 @@
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo" nz-col [nzSpan]="10">后台管理系统</div>
+    <div nz-col nz-col [nzSpan]="6" [nzPush]='13'>
+       <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'">
+          <a class="ant-dropdown-link" nz-dropdown style="color:#fff;font-size:16px">
+            {{username}}<i class="anticon anticon-down"></i>
+          </a>
+          <ul nz-menu class="user_">
+            <li nz-menu-item>
+              <a href="javascript:;" [routerLink]="['/admin/update-password']" style="padding:0;margin:0;width:100%;height:100%">修改密码</a>
+            </li>
+            <li nz-menu-item>
+               <a href="javascript:;"  (click)='submit_()' style="padding:0;margin:0;width:100%;height:100%">登出</a>
+            </li>
+          </ul>
+        </nz-dropdown>
+    </div>
+  </nz-header>
+  <nz-layout style="background:#fff;" class='content'>
+    <nz-sider [nzWidth]="250" class="list">
+      <ul nz-menu [nzMode]="'inline'" style="height:100%;background:#545454" >
+        <li nz-submenu [nzOpen]='true'>
+          <span title class="sildTitle">业务管理</span>
+          <ul class="sildList">
+               <li nz-menu-item>
+                  	<a href="javascript:;" [routerLink]="['/admin/city-management']">城市管理</a>
+               </li>
+               <li nz-menu-item>
+               	<a href="javascript:;" [routerLink]="['/admin/insurance-management']">保险管理</a>
+               </li>
+               <li nz-menu-item>
+                <a href="javascript:;" [routerLink]="['/admin/user-management']">用户管理</a>
+               </li>
+               <li nz-menu-item>
+                    <a href="javascript:;" [routerLink]="['/admin/ash-management']">小智管理</a>
+               </li>
+               <li nz-menu-item>
+                    <a href="javascript:;" [routerLink]="['/admin/policy-management']">保单管理</a>
+               </li>
+               
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title class="sildTitle">客户管理</span>
+          <ul class="sildList">
+               <li nz-menu-item>
+                     <a href="javascript:;" [routerLink]="['/admin/customer-management']">客户管理</a>
+               </li>
+               <li nz-menu-item>
+                  <a href="javascript:;" [routerLink]="['/admin/insurance-company']">保险公司</a>
+               </li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title class="sildTitle">设置</span>
+          <ul class="sildList">
+               <li nz-menu-item>
+                     <a href="javascript:;" [routerLink]="['/admin/employee-list']">员工设置</a>
+               </li>
+               <li nz-menu-item>
+                  <a href="javascript:;" [routerLink]="['/admin/personal-set']">个人设置</a>
+               </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider >
+    <nz-content >
+        <router-outlet ></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

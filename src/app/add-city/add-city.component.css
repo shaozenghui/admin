@@ -1,0 +1,15 @@
+#tabs2{
+	width: 100%;
+	overflow: hidden;
+}
+#tabs2 .tabs2_list{
+	width: 100%;
+	overflow: hidden;
+	float: left;
+}
+.default{
+	display: none;
+}
+.block_{
+	display: block;
+}

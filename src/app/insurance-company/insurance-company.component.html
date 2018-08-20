@@ -1,0 +1,37 @@
+ <nz-breadcrumb>
+    <nz-breadcrumb-item>客户管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>保险公司</nz-breadcrumb-item>
+  </nz-breadcrumb>
+<nz-card style="width:100%;" nzNoHovering='true'>
+    <ng-template #body>
+      <div nz-row class="tablr_tit">
+        <div nz-col [nzSpan]="4">
+            <button nz-button [nzType]="'primary'">
+                <a href="javascript:;" [routerLink]="['/admin/insurer-compy-create']" [queryParams]="{'sign':'add'}">添加</a>
+            </button>
+        </div>
+        <div nz-col [nzSpan]="10" [nzPush]='13' >
+           <nz-input [nzType]="'search'" [nzPlaceHolder]="'搜索'" [(ngModel)]="_value" style="width: 300px;"  (change)='citySearch()'></nz-input>
+        </div>
+      </div>
+      <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzShowSizeChanger]="true" [nzBordered]="true" [nzTotal]="_dataSet.length" nzShowTotal [(nzPageIndex)]="_current" (nzPageIndexChangeClick)='nzPageIndexChangeClick($event)' >
+        <thead nz-thead>
+          <tr>
+             <th nz-th><span>名称</span></th>
+            <th nz-th><span>保险数</span></th>
+            <th nz-th><span>维护人员</span></th>
+            <th nz-th><span>操作</span></th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td>{{data.name}}</td>
+              <td nz-td>{{data.insurance_num}}</td>
+              <td nz-td>{{data.username}}</td>
+              <td nz-td><a href="javascript:;" [routerLink]="['/admin/insurer-compy-create']" [queryParams]="{'sign':'change','id':data.id}">修改</a></td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-template>
+</nz-card>
+

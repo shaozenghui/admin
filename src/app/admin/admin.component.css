@@ -1,0 +1,28 @@
+ .logo {
+    font-size: 20px;
+    color: #fff;
+}
+.user_ li{
+	padding: 10px 40px;
+	text-align: left;
+}
+.ant-menu-submenu {
+    position: relative;
+    background: #3e3e3e !important;
+    color: #fff !important;
+    font-size: 16px !important;
+}
+.sildList a{
+  color: #fff !important;
+  font-size: 14px;
+}
+.sildList li{
+  width: 100%;
+  background: #545454;
+}
+.sildTitle{
+  font-size: 16px !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #737373 !important;
+}

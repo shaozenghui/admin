@@ -1,0 +1,19 @@
+<router-outlet></router-outlet>
+<div class="container-fuild">
+     <div class="login-form">
+          <p >寄意科技(后台管理系统)</p>
+            <div class="form-group">
+                <label for="username"  class="text-danger">用户名:</label>
+                <input type="text" autocomplete="off" [(ngModel)]="username"  class="form-control"  placeholder="请输入用户名" id="username" >
+            </div>
+            <div class="form-group">
+              <label for="password"  class="text-danger">密  码:</label>
+              <input type="password" autocomplete="off" autocomplete="off" [(ngModel)]="password" class="form-control"   placeholder="请输入密码"  id="password">
+             
+            </div>
+            <div class="form-group">
+                <button  class="btn btn-primary" (click)="submit_()">登录</button>
+            </div>
+     </div>
+</div>
+      

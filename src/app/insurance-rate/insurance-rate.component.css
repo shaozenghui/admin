@@ -1,0 +1,7 @@
+.plan_item{
+	border: 1px solid #cacaca;
+	overflow: hidden;
+	padding: 10px 0px;
+	padding-right: 20px;
+	border-radius: 10px;
+}

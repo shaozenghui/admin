@@ -1,0 +1,63 @@
+ <nz-breadcrumb >
+    <nz-breadcrumb-item>业务管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>保险管理</nz-breadcrumb-item>
+  </nz-breadcrumb>
+<nz-card style="width:100%;" nzNoHovering='true'>
+      <ng-template #body>
+        <div nz-row class="tablr_tit">
+           <div nz-col [nzSpan]="6">
+                <nz-input  [(ngModel)]="_value"></nz-input>
+          </div>
+          <div nz-col [nzSpan]="6" [nzOffset]="'2'">
+              <select  class="form-control"  [(ngModel)]="_value2">
+                <option  value="" >全部</option>
+                <option  value="1" >人寿险</option>
+                <option  value="2" >意外险</option>
+                <option  value="3" >重疾险</option>
+                <option  value="4" >医疗险</option>
+                
+              </select>
+          </div>
+          <div nz-col [nzSpan]="8" [nzOffset]="'2'">
+              <div nz-col [nzSpan]="6">
+                  <button nz-button [nzType]="'primary'" (click)='insuranceSearch()'>搜索</button>
+              </div>
+              <div nz-col [nzSpan]="6">
+                  <button nz-button [nzType]="'primary'">
+                    <a href="javascript:;" [routerLink]="['/admin/insurance-management-create']" [queryParams]="{'sign':'add'}">添加</a>
+                   </button>
+              </div>
+          </div>
+        </div>
+        <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzShowSizeChanger]="true" [nzBordered]="true" [nzTotal]="_dataSet.length" nzShowTotal [nzIsPageIndexReset]="true"  [(nzPageIndex)]="_current" (nzPageIndexChangeClick)='nzPageIndexChangeClick($event)' >
+          <thead nz-thead>
+            <tr>
+              <th nz-th><span>名称</span></th>
+              <th nz-th><span>公司</span></th>
+              <th nz-th><span>分数</span></th>
+              <th nz-th><span>险种类型</span></th>
+              <th nz-th><span>险种</span></th>
+              <th nz-th><span>维护时间</span></th>
+              <th nz-th><span>操作</span></th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td>{{data.name}}</td>
+              <td nz-td>{{data.insurer_name}}</td>
+              <td nz-td>{{data.username}}</td>
+              <td nz-td>{{data.category_type}}</td>
+              <td nz-td>{{data.get_category_txt}}</td>
+              <td nz-td>{{data.update_at}}</td>
+              <td nz-td>
+                  <a href="javascript:;" [routerLink]="['/admin/insurance-management-create']" [queryParams]="{'sign':'change','id':data.id}">修改</a>
+                  <a href="javascript:;" [routerLink]="['/admin/insurance-rate']" [queryParams]="{'id':data.id}">费率</a>
+                  <nz-popconfirm [nzTitle]="'确定要删除这个任务吗？'" (nzOnConfirm)="confirm(data.id)" >
+                        <a nz-popconfirm>删除</a>
+                  </nz-popconfirm>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </ng-template>
+</nz-card>
