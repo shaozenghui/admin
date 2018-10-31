@@ -17,6 +17,8 @@ import { UMeditorModule } from 'ngx-umeditor';
 
 import { CommonModule }     from '@angular/common';
 import { FileUploadModule } from 'ng2-file-upload';
+
+import { CKEditorModule} from 'ng2-ckeditor';
 // 组件
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -66,7 +68,7 @@ import { AshManagementDetaileComponent } from './ash-management-detaile/ash-mana
     UserDetailComponent,
     PolicyDetailComponent,
     AshManagementDetaileComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { AshManagementDetaileComponent } from './ash-management-detaile/ash-mana
     CommonModule,
     FileUploadModule,
     UMeditorModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule
   ],
   providers:[HttpsService,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   

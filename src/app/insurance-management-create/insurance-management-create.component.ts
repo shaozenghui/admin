@@ -12,6 +12,11 @@ import {NzMessageService} from 'ng-zorro-antd';
   styleUrls: ['./insurance-management-create.component.css']
 })
 export class InsuranceManagementCreateComponent implements OnInit {
+  name = 'ng2-ckeditor';
+  ckeConfig: any;
+  mycontent: string;
+  log: string = '';
+  @ViewChild("myckeditor") ckeditor: any;
   @ViewChild('full') full: InsuranceManagementCreateComponent;
   insurers;
   insurers_id;
@@ -51,6 +56,10 @@ export class InsuranceManagementCreateComponent implements OnInit {
    editonContentChange(event){
   }
   ngOnInit() {
+      this.ckeConfig = {
+        allowedContent: true,
+        extraPlugins: 'divarea'
+      };
   	 this.config = this.route.snapshot.data;
   	 this.titleService.setTitle(this.config.title);
      this.sign = this.route.snapshot.queryParams["sign"];

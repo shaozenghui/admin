@@ -192,12 +192,38 @@
 		    		</div>
 		    	</div>
 		    </div>
-	    	<umeditor [(ngModel)]="tab.yibao_info" 
-	          [config]="{UMEDITOR_HOME_URL:'./assets/umeditor/'}"
-	          [path]="'./assets/umeditor/'"
-	          [loadingTip]="'加载中..'"
-	          (onContentChange)="editonContentChange($event)" (onReady)="umReady($event)"  #full name='umeditor'>
-	  		</umeditor>
+		     <div class="row">
+		     	<div class="col-md-12">
+		     		<button class="btn btn-primary"  (click)='ageStandard_(tab.med_insurance_type_id,tab.med_insurance_type_id)'>添加</button>
+		     	</div>
+		     </div>
+		     <div *ngFor="let v of tab.premium_json;let i = index">
+ 			     <div class="row form-horizontal">
+ 					<div class="form-group col-md-3">
+ 	    				<label for="" class="text-danger col-md-6 control-label">年龄最小:</label>
+ 	    				<div class="col-md-6">
+ 	    					<input type="number"  [(ngModel)]="v.age_start"  class="form-control"  >
+ 	    				</div>
+ 	    			</div>
+ 	    			<div class="form-group col-md-3">
+ 	    				<label for="" class="text-danger col-md-6 control-label">年龄最大:</label>
+ 	    				<div class="col-md-6">
+ 	    					<input type="number"  [(ngModel)]="v.age_end"  class="form-control"  >
+ 	    				</div>
+ 	    			</div>
+ 	    			<div class="form-group col-md-3">
+ 	    				<label for="" class="text-danger col-md-6 control-label">缴费金额:</label>
+ 	    				<div class="col-md-6">
+ 	    					<input type="number"  [(ngModel)]="v.premium"  class="form-control"  >
+ 	    				</div>
+ 	    			</div>
+ 	    			<div class="form-group col-md-3">
+ 	    				<button class="btn btn-danger"  (click)='ageDel(tab.med_insurance_type_id,i)'>删除</button>
+ 	    			</div>
+ 			    </div>
+		     </div>
+	  		<ckeditor [(ngModel)]="tab.yibao_info" #myckeditor [config]="ckeConfig" debounce="500" (change)="editonContentChange($event)">
+	    	</ckeditor>
 	    </div>
     </div>
 	<div class="row">
@@ -205,5 +231,4 @@
 			<button class="btn btn-primary"  (click)=' sign == "add" ?  submit_1() : submit_2()' id="btn">保存</button>
 		</div>
 	</div>
-
 </div>

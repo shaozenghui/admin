@@ -91,12 +91,14 @@
 	<div class="row" style="margin-bottom:20px">
 		<div  class="col-md-12 wrapperTitle">详情描述</div>
 		<div class="col-md-12">
-			<umeditor [(ngModel)]="info" 
+			<!-- <umeditor [(ngModel)]="info" 
 		          [config]="{UMEDITOR_HOME_URL:'./assets/umeditor/'}"
 		          [path]="'./assets/umeditor/'"
 		          [loadingTip]="'加载中……'"
 		          (onContentChange)="editonContentChange($event)"  #full name='umeditor'>
-		    </umeditor>
+		    </umeditor> -->
+		    <ckeditor [(ngModel)]="info"  #myckeditor [config]="ckeConfig" debounce="500" (change)="editonContentChange($event)">
+	    	</ckeditor>
 		</div>
 	</div>
 	<div class="row">
