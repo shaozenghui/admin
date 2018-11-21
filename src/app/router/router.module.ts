@@ -26,6 +26,7 @@ import { PolicyManagementComponent } from '../policy-management/policy-managemen
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { PolicyDetailComponent } from '../policy-detail/policy-detail.component';
 import { AshManagementDetaileComponent } from '../ash-management-detaile/ash-management-detaile.component';
+import { ScoreManagementComponent } from '../score-management/score-management.component';
  const config:Routes = [
  	{
  		path:'login',
@@ -135,6 +136,11 @@ import { AshManagementDetaileComponent } from '../ash-management-detaile/ash-man
  				path:'rate-editing',
  				component:RateEditingComponent,
  				data:{title:'费率编辑'}
+ 			},
+ 			{
+ 				path:'score-management',
+ 				component:ScoreManagementComponent,
+ 				data:{title:'保险管理'}
  			},
  			{path:'',redirectTo:'city-management',pathMatch:"full"}
  		]

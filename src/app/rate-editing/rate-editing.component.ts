@@ -110,7 +110,9 @@ export class RateEditingComponent implements OnInit {
         method: "POST",
    });
    selectedFileOnChanged(e){
+     console.log(e.target.value);
       this.updUrl = e.target.value.split('fakepath')[1].substring(1);
+      console.log(this.updUrl);
    }
    uploadFile() {
         var that = this;

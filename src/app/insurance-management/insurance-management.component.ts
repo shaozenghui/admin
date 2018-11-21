@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { HttpsService } from '../https.service';//引入服务
+import { HttpsService } from '../https.service';//引入服务import * as $ from 'jquery'
+import { FileUploader } from 'ng2-file-upload';
 import {NzMessageService} from 'ng-zorro-antd';
 @Component({
   selector: 'app-insurance-management',
@@ -16,6 +17,11 @@ export class InsuranceManagementComponent implements OnInit {
   requestTitle:string = "insuranceManagement";
   deleteTitle;
   _current = 1;
+   updUrl;
+   DownloadUrl;
+   DownloadUrl2;
+   fil_suffix:string;
+   uploadID = ''
   constructor(
     private titleService:Title,
     private route:ActivatedRoute,
@@ -29,6 +35,7 @@ export class InsuranceManagementComponent implements OnInit {
           this._value2 = localStorage.getItem('insurance_select_value2')
           this.ser.searchList_ins(this.requestTitle,this._value,this._value2).subscribe(
              (data)=>{
+
                localStorage.setItem('user_id',data.user_id);
                this._dataSet = data.result;
                if(localStorage.getItem('insurance_nzPageIndex')){
@@ -53,6 +60,35 @@ export class InsuranceManagementComponent implements OnInit {
         )
       }
       
+  }
+  public uploader:FileUploader = new FileUploader({     
+            method: "POST",
+            allowedFileType:["image","xls","video","audio","pdf","compress","doc","ppt"],
+            autoUpload: false,    
+  });
+   
+  selectedFileOnChanged(e){
+       var that = this;
+       that.updUrl = e.target.value.split('.')[1]; 
+       that.uploader.queue[0].onSuccess = function (response, status, headers) {
+           if (status == 200) {
+               that._message.create("success",'上传成功！')
+           } else {
+               that._message.create("error",'上传失败！');
+           }
+       };
+       that.uploader.queue[0].upload();
+  }
+  uploadFile(x){
+     var that = this;
+     $('#file').click();
+     that.uploader.options.url = '';
+     that.uploader.options.url = "http://118.89.170.246:8001/api/insuranceManagement/"+x+"/upload_file/";
+     that.uploader.onBuildItemForm = function(fileItem,form){
+          form.append('file_suffix',that.updUrl)//这个是自己定义的参数
+          form.append('user_id',localStorage.getItem('user_id'))
+         
+     }
   }
   insuranceSearch(){
     this.ser.searchList_ins(this.requestTitle,this._value,this._value2).subscribe(

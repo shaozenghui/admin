@@ -25,6 +25,7 @@ export class HttpsService {
       {headers:new HttpHeaders().set("Access-Control-Allow-Origin", "*")
      }).subscribe(
          (data)=>{
+  
             if(data['code'] == '200'){
                localStorage.setItem('token',data['token']);
                this.router.navigate(['/admin']);

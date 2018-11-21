@@ -19,14 +19,14 @@
               <p class="title_">公司名称</p>
                <input [(ngModel)]="comp_value" class="form-control">
           </div>
-          <div nz-col [nzSpan]="8">
+          <div nz-col [nzSpan]="10" [nzOffset]="2">
               <p class="title_">状态</p> 
               <select name="" id="select" class="form-control" [(ngModel)]="status_name"  nz-col [nzSpan]="6">
                 <option  [value]="_option" >全部</option>
                 <option  value="1" >正常</option>
                 <option  value="0" >禁用</option>
               </select>
-              <div nz-col [nzSpan]="6">
+              <div nz-col [nzSpan]="6" [nzOffset]="2">
                  <button nz-button [nzType]="'primary'" (click)="searchCustome()">
                     <span>搜索</span>
                   </button>
@@ -47,6 +47,7 @@
               <th nz-th><span>创建时间</span></th>
               <th nz-th><span>状态</span></th>
               <th nz-th><span>维护人员</span></th>
+              <th nz-th><span>保险管理</span></th>
               <th nz-th><span>状态</span></th>
             </tr>
           </thead>
@@ -58,6 +59,8 @@
               <td nz-td>{{data.created_at}}</td>
               <td nz-td>{{data.get_status_txt}}</td>
               <td nz-td>{{data.updated_by}}</td>
+              <td nz-td><a href="javascript:;" [routerLink]="['/admin/score-management']" 
+              [queryParams]="{'id':data.id}">修改</a></td>
               <td nz-td><a href="javascript:;" [routerLink]="['/admin/customer-creat']" 
               [queryParams]="{'id':data.id,'sign':'change'}">修改</a></td>
             </tr>

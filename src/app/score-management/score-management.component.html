@@ -1,0 +1,68 @@
+ <nz-breadcrumb >
+    <nz-breadcrumb-item>客户管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>保险管理</nz-breadcrumb-item>
+  </nz-breadcrumb>
+<nz-card style="width:100%;" nzNoHovering='true'>
+      <ng-template #body>
+        <div nz-row class="tablr_tit">
+          <div nz-col [nzSpan]="4">
+              <p class="title_">保险产品名称</p>
+               <input [(ngModel)]="ins_value" class="form-control" (change)="searchCustome()">
+          </div>
+          <div nz-col [nzSpan]="4" [nzOffset]="2">
+              <p class="title_">公司名称</p>
+               <input [(ngModel)]="comp_value" class="form-control" (change)="searchCustome()">
+          </div>
+          <div nz-col [nzSpan]="10" [nzOffset]="2">
+              <p class="title_">险种类型</p>
+	          <select name="" id="select" class="form-control" [(ngModel)]="status_name"  nz-col [nzSpan]="6" (change)="searchCustome()" >
+	            <option  value="" >全部</option>
+	            <option  *ngFor="let v of insurance_type" [value]="v.id">{{v.val}}</option>
+	          </select>
+          	<div nz-col [nzSpan]="6" [nzOffset]="4">
+                 <button nz-button [nzType]="'primary'" (click)="searchCustome()">
+                    <span>搜索</span>
+                  </button>
+             </div>
+             <div nz-col [nzSpan]="6" [nzOffset]="2">
+                 <span style="font-size: 16px;font-weight: bold;">已选：{{sel_nums}}/{{product_nums}}</span>
+             </div>
+          </div>
+          	
+        </div>
+        <nz-table #nzTable [nzDataSource]="_dataSet"  [nzBordered]="true" [nzScroll]="{ y: 380 } "  (nzDataChange)="_displayDataChange($event)" [nzIsPagination]="false">
+           <ng-template #nzFixedHeader>
+	          <thead nz-thead>
+	            <tr>
+	              <th nz-th [nzCheckbox]="true" [nzWidth]="'50px'">
+		            <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+		            </label>
+		          </th>
+	              <th nz-th [nzWidth]="'200px'"><span>保险产品</span></th>
+	              <th nz-th [nzWidth]="'200px'"><span>公司名称</span></th>
+	              <th nz-th [nzWidth]="'150px'"><span>险种类型</span></th>
+	              <th nz-th [nzWidth]="'150px'"><span>产品评分</span></th>
+	            </tr>
+	          </thead>
+	      </ng-template>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data" >
+              <td nz-td [nzCheckbox]="true">
+	            <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
+	            </label>
+	          </td>
+              <td nz-td>{{data.name}}</td>
+              <td nz-td>{{data.ins_name}}</td>
+              <td nz-td>{{data.category_type}}</td>
+              <td nz-td><input [(ngModel)]="data.score" class="form-control"></td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </ng-template>
+      
+</nz-card>
+ <div class="form-group" style="margin-top: 20px;">
+	<div class="col-md-3 col-md-offset-9">
+		<button class="btn btn-primary" (click)="submit()" id="submit_" style="float: right;">保存</button>
+	</div>
+ </div>

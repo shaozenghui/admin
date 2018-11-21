@@ -43,6 +43,7 @@ import { PolicyManagementComponent } from './policy-management/policy-management
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { PolicyDetailComponent } from './policy-detail/policy-detail.component';
 import { AshManagementDetaileComponent } from './ash-management-detaile/ash-management-detaile.component';
+import { ScoreManagementComponent } from './score-management/score-management.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { AshManagementDetaileComponent } from './ash-management-detaile/ash-mana
     UserDetailComponent,
     PolicyDetailComponent,
     AshManagementDetaileComponent,
+    ScoreManagementComponent,
     LoginComponent,
   ],
   imports: [

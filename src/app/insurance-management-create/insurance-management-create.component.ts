@@ -43,8 +43,9 @@ export class InsuranceManagementCreateComponent implements OnInit {
   category_;
   policy_pattern;
   policy_pattern_select;
-
+  product_list = [];
   state_select;
+  brother_id = '';
   constructor(
     private titleService:Title,
     private route:ActivatedRoute,
@@ -66,9 +67,15 @@ export class InsuranceManagementCreateComponent implements OnInit {
      if(this.sign == "change"){
        this.ser.update(this.updateTitle).subscribe(
          (data)=>{
-           
+           for(var key in data.product_list){
+             this.product_list.push({
+               id:Number(key),
+               val:data.product_list[key]
+             })
+           }
+           this.brother_id = data.model.brother_id;
            // 状态
-              this.state_select = data.model.is_active;
+             this.state_select = data.model.is_active;
            // 险种
            this.category = data.category;
            this.category_ = this.category[data.model.category_type - 1 ][1];
@@ -102,9 +109,15 @@ export class InsuranceManagementCreateComponent implements OnInit {
      }else{
            this.ser.getCity(this.requestTitle).subscribe(
               (data)=>{
-                  this.category_type = data.category_type;
-                  this.category = data.category;
-                  this.state_select = '1';
+                for(var key in data.product_list){
+                  this.product_list.push({
+                    id:Number(key),
+                    val:data.product_list[key]
+                  })
+                }
+                this.category_type = data.category_type;
+                this.category = data.category;
+                this.state_select = '1';
                  this.guarantee_pattern = data.guarantee_pattern;
                  this.guarantee_pattern_select = data.guarantee_pattern[0][0];
 
@@ -146,9 +159,10 @@ export class InsuranceManagementCreateComponent implements OnInit {
   	    "info": this.info,
         "policy_pattern":this.policy_pattern_select,
         "guarantee_pattern":this.guarantee_pattern_select,
-        "is_active":this.state_select
+        "is_active":this.state_select,
+        "brother_id":this.brother_id
   	 }
-     console.log( this.createParamsObj);
+
      if(this.insurname == ''){
         this._message.create("error",'名称为必填项！');
      }else if(this.score == undefined){
@@ -175,7 +189,8 @@ export class InsuranceManagementCreateComponent implements OnInit {
         "info": this.info,
         "policy_pattern":this.policy_pattern_select,
         "guarantee_pattern":this.guarantee_pattern_select,
-        "is_active":this.state_select
+        "is_active":this.state_select,
+        "brother_id":this.brother_id
      }
      if(this.insurname == ''){
         this._message.create("error",'名称为必填项！');
