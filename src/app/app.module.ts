@@ -44,6 +44,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { PolicyDetailComponent } from './policy-detail/policy-detail.component';
 import { AshManagementDetaileComponent } from './ash-management-detaile/ash-management-detaile.component';
 import { ScoreManagementComponent } from './score-management/score-management.component';
+import { AdditionalRiskComponent } from './additional-risk/additional-risk.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ScoreManagementComponent } from './score-management/score-management.co
     PolicyDetailComponent,
     AshManagementDetaileComponent,
     ScoreManagementComponent,
+    AdditionalRiskComponent,
     LoginComponent,
   ],
   imports: [

@@ -28,14 +28,14 @@ export class InsuranceManagementComponent implements OnInit {
     private ser:HttpsService,
     private _message: NzMessageService
   ){}
-  ngOnInit() {
+  ngOnInit() {   
   		this.config = this.route.snapshot.data;
       this.titleService.setTitle(this.config.title);
       if(localStorage.getItem('insurance_select_value2')){
           this._value2 = localStorage.getItem('insurance_select_value2')
           this.ser.searchList_ins(this.requestTitle,this._value,this._value2).subscribe(
              (data)=>{
-
+               
                localStorage.setItem('user_id',data.user_id);
                this._dataSet = data.result;
                if(localStorage.getItem('insurance_nzPageIndex')){

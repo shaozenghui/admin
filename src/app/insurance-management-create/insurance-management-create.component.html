@@ -66,10 +66,10 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
-					<label for="" class="text-danger col-md-6 control-label">选择产品:</label>
-					<div class="col-md-6">
-						<nz-select nzAllowClear [nzPlaceHolder]="'选择产品'" [(ngModel)]="brother_id" [nzShowSearch]="true" style="width: 210px;">
+				<div class="form-group col-md-12">
+					<label for="" class="text-danger col-md-3 control-label">选择产品:</label>
+					<div class="col-md-9">
+						<nz-select nzAllowClear [nzPlaceHolder]="'选择产品'" [(ngModel)]="brother_id" [nzShowSearch]="true" style="width: 510px;">
 					      <nz-option *ngFor="let option of product_list" [nzLabel]="option.val" [nzValue]="option.id"> </nz-option>
 					    </nz-select>
 					</div>

@@ -27,6 +27,7 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { PolicyDetailComponent } from '../policy-detail/policy-detail.component';
 import { AshManagementDetaileComponent } from '../ash-management-detaile/ash-management-detaile.component';
 import { ScoreManagementComponent } from '../score-management/score-management.component';
+import { AdditionalRiskComponent } from '../additional-risk/additional-risk.component';
  const config:Routes = [
  	{
  		path:'login',
@@ -43,6 +44,7 @@ import { ScoreManagementComponent } from '../score-management/score-management.c
  				component:PolicyDetailComponent,
  				data:{title:'保单详情'}
  			},
+ 			
  			{
  				path:'user-detail',
  				component:UserDetailComponent,
@@ -141,6 +143,11 @@ import { ScoreManagementComponent } from '../score-management/score-management.c
  				path:'score-management',
  				component:ScoreManagementComponent,
  				data:{title:'保险管理'}
+ 			},
+ 			{
+ 				path:'additional-risk',
+ 				component:AdditionalRiskComponent,
+ 				data:{title:'附加险'}
  			},
  			{path:'',redirectTo:'city-management',pathMatch:"full"}
  		]

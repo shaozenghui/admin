@@ -1,30 +1,16 @@
  <nz-breadcrumb >
     <nz-breadcrumb-item>业务管理</nz-breadcrumb-item>
     <nz-breadcrumb-item>保险管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>附加险</nz-breadcrumb-item>
   </nz-breadcrumb>
 <nz-card style="width:100%;" nzNoHovering='true'>
       <ng-template #body>
         <div nz-row class="tablr_tit">
-           <div nz-col [nzSpan]="6">
-                <nz-input  [(ngModel)]="_value"></nz-input>
-          </div>
-          <div nz-col [nzSpan]="6" [nzOffset]="'2'">
-              <select  class="form-control"  [(ngModel)]="_value2">
-                <option  value="" >全部</option>
-                <option  value="1" >人寿险</option>
-                <option  value="2" >意外险</option>
-                <option  value="3" >重疾险</option>
-                <option  value="4" >医疗险</option>
-                
-              </select>
-          </div>
           <div nz-col [nzSpan]="8" [nzOffset]="'2'">
-              <div nz-col [nzSpan]="6">
-                  <button nz-button [nzType]="'primary'" (click)='insuranceSearch()'>搜索</button>
-              </div>
+             
               <div nz-col [nzSpan]="6">
                   <button nz-button [nzType]="'primary'">
-                    <a href="javascript:;" [routerLink]="['/admin/insurance-management-create']"  [queryParams]="{'sign':'add'}">添加</a>
+                    <a href="javascript:;" [routerLink]="['/admin/insurance-management-create']" [queryParams]="{'sign':'add','attach':'attach','id':insId}">添加</a>
                    </button>
               </div>
           </div>
@@ -38,8 +24,6 @@
               <th nz-th><span>险种类型</span></th>
               <th nz-th><span>险种</span></th>
               <th nz-th><span>维护时间</span></th>
-              <th nz-th><span>费率原文件</span></th>
-              <th nz-th><span>附加险</span></th>
               <th nz-th><span>操作</span></th>
             </tr>
           </thead>
@@ -51,18 +35,13 @@
               <td nz-td>{{data.category_type}}</td>
               <td nz-td>{{data.get_category_txt}}</td>
               <td nz-td>{{data.update_at}}</td>
+              
               <td nz-td>
-                 <input type="file" id="file"  ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" style="display: none" />
-                 <button nz-button [nzType]="'primary'" (click)="uploadFile(data.id)">上传</button>
-                 <button nz-button [nzType]="'primary'" *ngIf="data.file_url"><a [href]="data.file_url" download>下载</a></button>
-              </td>
-               <td nz-td><a href="javascript:;" [routerLink]="['/admin/additional-risk']" [queryParams]="{'id':data.id}">附加险</a></td>
-              <td nz-td>
-                  <a href="javascript:;" [routerLink]="['/admin/insurance-management-create']" [queryParams]="{'sign':'change','id':data.id}">修改</a>
-                  <a href="javascript:;" [routerLink]="['/admin/insurance-rate']" [queryParams]="{'insId':data.id}">费率</a>
+                  <a href="javascript:;" [routerLink]="['/admin/insurance-management-create']" [queryParams]="{'sign':'change','id':data.id,'attach':'attach'}">修改</a>
+                  <a href="javascript:;" [routerLink]="['/admin/insurance-rate']" [queryParams]="{'attach_id':data.id,'attach':'attach','insId':insId}">费率</a>
                   <nz-popconfirm [nzTitle]="'确定要删除这个任务吗？'" (nzOnConfirm)="confirm(data.id)" >
                         <a nz-popconfirm>删除</a>
-                  </nz-popconfirm>
+                  </nz-popconfirm>  
               </td>
             </tr>
           </tbody>

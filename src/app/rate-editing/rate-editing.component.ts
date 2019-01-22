@@ -41,8 +41,11 @@ export class RateEditingComponent implements OnInit {
    is_schedule;
    updUrl;
    user_id;
-   requestTitle:string = "insuranceManagement/"+this.route.snapshot.queryParams["insId"]+'/'
-   +this.route.snapshot.queryParams["id"]+"/ratio_edit";
+   requestTitle;
+   main_id;
+   insId;
+   plan_id;
+   attach;
    // 导出费率表
    exelTitle = "insuranceManagement/generate_excel";
    exelParams;
@@ -53,6 +56,17 @@ export class RateEditingComponent implements OnInit {
        private _message: NzMessageService,
     ) {}
    ngOnInit() {
+     this.attach = this.route.snapshot.queryParams["attach"];
+     this.main_id = this.route.snapshot.queryParams["main_id"];
+     this.insId = this.route.snapshot.queryParams["insId"];
+     this.plan_id = this.route.snapshot.queryParams["id"];
+     if(this.attach == 'true'){
+       this.requestTitle = "insuranceManagement/attach/"+this.main_id+"/"+this.insId+'/'
+     +this.plan_id+"/ratio_edit";
+     }else{
+        this.requestTitle = "insuranceManagement/"+this.insId+'/'
+     +this.plan_id+"/ratio_edit";
+     }
     this.genderOptions = [
       { value:1,label:'男'},
       { value:2,label:'女'}
@@ -110,9 +124,7 @@ export class RateEditingComponent implements OnInit {
         method: "POST",
    });
    selectedFileOnChanged(e){
-     console.log(e.target.value);
       this.updUrl = e.target.value.split('fakepath')[1].substring(1);
-      console.log(this.updUrl);
    }
    uploadFile() {
         var that = this;
@@ -130,8 +142,13 @@ export class RateEditingComponent implements OnInit {
   	$('#endit input').removeAttr('disabled');
   }
   dowloadFile(){
-     var DownloadUrl = "insuranceManagement/"+this.route.snapshot.queryParams["insId"]+'/'
-    +this.route.snapshot.queryParams["id"]+"/download_excel";
+    if(this.attach == 'true'){
+      var DownloadUrl = "insuranceManagement/attach/"+this.insId+'/'
+      + this.plan_id+"/download_excel";
+    }else{
+      var DownloadUrl = "insuranceManagement/"+ this.main_id+'/'
+      +this.plan_id+"/download_excel";
+    }
      this.ser.getList(DownloadUrl).subscribe(
         (data)=>{
            this.DownloadUrl2 = "http://118.89.170.246"+data.url;
@@ -171,6 +188,7 @@ export class RateEditingComponent implements OnInit {
     }
   	this.ser.updateSubmit(this.exelTitle,this.exelParams).subscribe(
   	   (data)=>{
+
   	    this.DownloadUrl = "http://118.89.170.246"+data.url;
   	   }
   	)

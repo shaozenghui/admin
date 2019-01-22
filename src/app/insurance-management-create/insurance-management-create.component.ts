@@ -30,9 +30,9 @@ export class InsuranceManagementCreateComponent implements OnInit {
   insurname = '';
   score;
   info ;
-  requestTitle = "insuranceManagement/create";
-  createTitle = "insuranceManagement/create";
-  updateTitle = "insuranceManagement/"+this.route.snapshot.queryParams["id"]+"/update/";
+  requestTitle ;
+  createTitle ;
+  updateTitle ;
   updateParamsObj;
   createParamsObj;
   sign;
@@ -57,6 +57,16 @@ export class InsuranceManagementCreateComponent implements OnInit {
    editonContentChange(event){
   }
   ngOnInit() {
+    // 判断是否是附加险
+    if(this.route.snapshot.queryParams["attach"]){
+      this.requestTitle = "insuranceManagement/attach/create/"+this.route.snapshot.queryParams["id"];
+      this.createTitle = "insuranceManagement/attach/create/"+this.route.snapshot.queryParams["id"];
+      this.updateTitle = "insuranceManagement/attach/"+this.route.snapshot.queryParams["id"]+"/update/";
+    }else{
+      this.requestTitle = "insuranceManagement/create";
+      this.createTitle = "insuranceManagement/create";
+      this.updateTitle = "insuranceManagement/"+this.route.snapshot.queryParams["id"]+"/update/";
+    }
       this.ckeConfig = {
         allowedContent: true,
         extraPlugins: 'divarea'
@@ -130,6 +140,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
 
                  this.category_ = data.category[0][1];
                  this.category_select = data.category[0][1][0][0];
+                
                  this.category_type_select = data.category_type[0][0];
 
                  this.payment_method = data.category[0][2];
@@ -147,6 +158,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
   changeCategory_type(e){
     this.payment_method = this.category[e.target.value -1 ][2];
     this.category_ = this.category[e.target.value -1 ][1]
+    this.category_select = this.category_[0][0];
   }
   submit_1(){
   	 this.createParamsObj = {

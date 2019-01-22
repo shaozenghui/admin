@@ -41,7 +41,7 @@
                <div class="form-group">
                  <label for="" class="text-danger col-md-3 control-label">费率:</label>
                  <div class="col-md-9">
-                   <a href="javascript:;" style="position: relative;top: 8px;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':item.id,'insId':insId,'schedule_name':item.name,'amount_type':item.amount_type,'amount_min':item.amount_min,'amount_max':item.amount_max,'has_schedule':has_schedule}">费率编辑</a>
+                   <a href="javascript:;" style="position: relative;top: 8px;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':item.id,'insId':insId,'main_id':main_id,'schedule_name':item.name,'amount_type':item.amount_type,'amount_min':item.amount_min,'amount_max':item.amount_max,'has_schedule':has_schedule,'attach':attachflag}">费率编辑</a>
                  </div>
                </div>
                <div class="form-group">
@@ -81,7 +81,7 @@
               <div class="form-group" >
                 <label for="" class="text-danger col-md-3 control-label">费率:</label>
                 <div class="col-md-9">
-                   <a href="javascript:;" style="position: relative;top: 8px;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':model_schedule.id,'insId':insId,'amount_type':model_schedule.amount_type,'amount_min':model_schedule.amount_min,'amount_max':model_schedule.amount_max}" >费率编辑</a>
+                   <a href="javascript:;" style="position: relative;top: 8px;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':model_schedule.id,'insId':insId,'main_id':main_id,'amount_type':model_schedule.amount_type,'amount_min':model_schedule.amount_min,'amount_max':model_schedule.amount_max,'attach':attachflag}" >费率编辑</a>
                 </div>
               </div>
           </div>

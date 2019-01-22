@@ -10,8 +10,8 @@ import {NzMessageService} from 'ng-zorro-antd';
   styleUrls: ['./insurance-rate.component.css']
 })
 export class InsuranceRateComponent implements OnInit {
-   requestTitle:string = "insuranceManagement/"+this.route.snapshot.queryParams["id"]+"/ratio/";
-   deteleTitle:string = "insuranceManagement/schedule_delete";
+   requestTitle;
+   deteleTitle;
    model_schedules:any = [];
    model_schedule:any = {
       amount_type:'2',
@@ -23,10 +23,13 @@ export class InsuranceRateComponent implements OnInit {
    has_schedule;
    detelteParams;
    insId;
-   sign;
+   attach_id;
    amount_type;
    flag;
    flag2;
+   attachflag = false;
+   main_id;
+   attach;
    defaulArr:any = {
       name:'',
       amount_type:2,
@@ -43,7 +46,19 @@ export class InsuranceRateComponent implements OnInit {
 
     ) {}
   ngOnInit() {
-  		this.sign = this.route.snapshot.queryParams["id"];
+  		this.attach_id = this.route.snapshot.queryParams["attach_id"];
+      this.main_id = this.route.snapshot.queryParams["insId"];
+      this.attach = this.route.snapshot.queryParams["attach"];
+      //判断是否是附加险
+      if(this.attach){
+         this.attachflag = true;
+         this.requestTitle = "insuranceManagement/attach/"+this.attach_id+"/ratio/";
+         this.deteleTitle = "insuranceManagement/attach/schedule_delete";
+      }else{
+        this.attachflag = false;
+        this.requestTitle = "insuranceManagement/"+this.main_id+"/ratio/";
+        this.deteleTitle = "insuranceManagement/schedule_delete";
+      }
       this.ser.getList(this.requestTitle).subscribe(
          (data)=>{
            this.insId = data.model.id;
