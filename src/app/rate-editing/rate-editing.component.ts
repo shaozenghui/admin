@@ -37,8 +37,6 @@ export class RateEditingComponent implements OnInit {
    plan_select:string;
    plan_max:string;
    plan_min:string;
-   is_default;
-   is_schedule;
    updUrl;
    user_id;
    requestTitle;
@@ -83,20 +81,13 @@ export class RateEditingComponent implements OnInit {
       { value:5,label:'5类'},
       { value:6,label:'6类'},
     ]
-    this.flag = false;
-    this.id = this.route.snapshot.queryParams["id"];
+     this.flag = false;
+     this.id = this.route.snapshot.queryParams["id"];
      this.plan_name = this.route.snapshot.queryParams["schedule_name"];
      this.plan_select = this.route.snapshot.queryParams["amount_type"];
      this.plan_max = this.route.snapshot.queryParams["amount_max"];
      this.plan_min = this.route.snapshot.queryParams["amount_min"];
-     if(this.route.snapshot.queryParams["has_schedule"]){
-       this.is_schedule = '1';
-       this.is_default = '0'
-     }else{
-       this.is_schedule = '0';
-       this.is_default = '1';
-       this.plan_name = ' '; 
-     }
+    
     this.ser.getList(this.requestTitle).subscribe(
        (data)=>{
         this.age_min = data.model_condition.age_min;
@@ -120,22 +111,24 @@ export class RateEditingComponent implements OnInit {
 
    }
    public uploader:FileUploader = new FileUploader({    
-        url: "http://118.89.170.246:8001/api/insuranceManagement/upload_excel/"+localStorage.getItem('user_id'),   
         method: "POST",
    });
    selectedFileOnChanged(e){
-      this.updUrl = e.target.value.split('fakepath')[1].substring(1);
+      var that = this;
+      that.updUrl = e.target.value.split('fakepath')[1].substring(1);
+      that.uploader.queue[0].onSuccess = function (response, status, headers) {
+        if (status == 200) {
+            that._message.create("success",'上传成功！')
+        } else {
+            that._message.create("error",'上传失败！');
+        }
+        
+      };
+      that.uploader.queue[0].upload();
    }
    uploadFile() {
-        var that = this;
-        that.uploader.queue[0].onSuccess = function (response, status, headers) {
-            if (status == 200) {
-                that._message.create("success",'上传成功！')
-            } else {
-                that._message.create("error",'上传失败！');
-            }
-        };
-        that.uploader.queue[0].upload();
+        $('#file').click();
+        this.uploader.options.url = "http://118.89.170.246:8001/api/insuranceManagement/upload_excel/"+localStorage.getItem('user_id') 
     }
   endit(){
   	this.flag = false;
@@ -188,13 +181,14 @@ export class RateEditingComponent implements OnInit {
     }
   	this.ser.updateSubmit(this.exelTitle,this.exelParams).subscribe(
   	   (data)=>{
-
   	    this.DownloadUrl = "http://118.89.170.246"+data.url;
   	   }
   	)
   }
   submit_(){
     this.submit_Params = { 
+      "id":this.insId,
+      "schedule_id":this.plan_id,
       "gender":this.selectedGenderOption ,  
       "social_guarantee": this.selectedSocialOption,   
       "age_min": this.age_min.toString(), 
@@ -202,12 +196,6 @@ export class RateEditingComponent implements OnInit {
       "career_type": this.selectedGradeleOption,   
       "guarantee_period": this.selectedPeriodOption,
       "payment_period": this.selectedPaymentOption,   
-      "schedule_name":this.plan_name,   
-      "amount_type": this.plan_select, 
-      "amount_min": this.plan_min,   
-      "amount_max": this.plan_max,    
-      "is_default": this.is_default,     
-      "is_schedule": this.is_schedule,
     }
     this.ser.updateSubmit(this.requestTitle,this.submit_Params).subscribe(
        (data)=>{
@@ -219,6 +207,9 @@ export class RateEditingComponent implements OnInit {
           }
        }
     )
+  }
+  back_(){
+      window.history.back(); 
   }
 }
 

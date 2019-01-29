@@ -2,14 +2,17 @@
     <nz-breadcrumb-item>
        <a href="javascript:;" [routerLink]="['/admin/insurance-management']" >保险管理</a>
     </nz-breadcrumb-item>
-    <nz-breadcrumb-item>费率</nz-breadcrumb-item>
+    <nz-breadcrumb-item>计划</nz-breadcrumb-item>
   </nz-breadcrumb>
 <div class="wrapper">
   <div class="row" id="model_schedules">
     <div class="col-md-12"  >
-        <p style="height:50px;line-height:50px;font-size:20px;background:#efefef;padding-left:20px;margin-bottom:20px"><span>计划</span><button class="btn btn-primary pull-right" (click)="add_plan()">添加</button></p>
+        <p style="height:50px;line-height:50px;font-size:20px;background:#efefef;padding-left:20px;margin-bottom:20px">
+            <span>计划</span>
+            <button class="btn btn-primary pull-right" (click)="add_plan()">添加</button>
+        </p>
        <div *ngIf='flag' >
-         <div *ngFor="let item of model_schedules" >
+         <div *ngFor="let item of model_schedules;let idx = index" >
              <div class="plan_item col-md-4 form-horizontal">
                <div class="form-group">
                  <label for="" class="text-danger col-md-3 control-label">名称:</label>
@@ -38,22 +41,22 @@
                    <input type="number" class="form-control"  [(ngModel)]="item.amount_max">
                  </div>
                </div>
+              
                <div class="form-group">
-                 <label for="" class="text-danger col-md-3 control-label">费率:</label>
-                 <div class="col-md-9">
-                   <a href="javascript:;" style="position: relative;top: 8px;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':item.id,'insId':insId,'main_id':main_id,'schedule_name':item.name,'amount_type':item.amount_type,'amount_min':item.amount_min,'amount_max':item.amount_max,'has_schedule':has_schedule,'attach':attachflag}">费率编辑</a>
-                 </div>
-               </div>
-               <div class="form-group">
-                 <div class="col-md-4 col-md-offset-4">
-                   <button class="btn btn-primary" (click)='delete_(item.id,$event)' >删除</button>
+                 <div class="col-md-8 col-md-offset-2">
+                   <button class="btn btn-primary" (click)='save_plan(item,idx)' >保存</button>
+                   <button class="btn btn-primary" (click)='delete_(item.id,$event)'  *ngIf="idx != 0">删除</button>
+                   <button class="btn btn-primary" *ngIf="item.id != '0'">
+                        <a href="javascript:;" style="color: #fff;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':item.id,'insId':insId,'main_id':main_id,'schedule_name':item.name,'amount_type':item.amount_type,'amount_min':item.amount_min,'amount_max':item.amount_max,'has_schedule':has_schedule,'attach':attachflag}">费率编辑</a>
+                   </button>
+                   
                  </div>
                </div>
              </div>
          </div>
        </div>
     </div>
-    <div class="col-md-12" >
+    <!-- <div class="col-md-12" >
        <p style="height:50px;line-height:50px;font-size:20px;background:#efefef;padding-left:20px;margin-bottom:20px"><span>保险信息</span></p>
        <div >
          <div class="col-md-4 form-horizontal plan_item">
@@ -78,14 +81,19 @@
                   <input type="number" class="form-control"  [(ngModel)]="model_schedule.amount_max">
                 </div>
               </div>
-              <div class="form-group" >
+              <div class="form-group"  *ngIf="model_schedule.id != '0'">
                 <label for="" class="text-danger col-md-3 control-label">费率:</label>
                 <div class="col-md-9">
                    <a href="javascript:;" style="position: relative;top: 8px;" [routerLink]="['/admin/rate-editing']" [queryParams]="{'id':model_schedule.id,'insId':insId,'main_id':main_id,'amount_type':model_schedule.amount_type,'amount_min':model_schedule.amount_min,'amount_max':model_schedule.amount_max,'attach':attachflag}" >费率编辑</a>
                 </div>
               </div>
+              <div class="form-group">
+                <div class="col-md-6 col-md-offset-2">
+                  <button class="btn btn-primary" (click)='save_policy(model_schedule)' >保存</button>
+                </div>
+              </div>
           </div>
        </div>
-    </div>
+    </div> -->
   </div>
 </div>

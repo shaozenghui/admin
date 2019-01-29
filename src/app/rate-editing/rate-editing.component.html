@@ -41,7 +41,6 @@
 				        [nzLabel]="option.label"
 				        [nzValue]="option.value"
 				        [nzDisabled]="option.disabled" >
-
 				      </nz-option>
 				    </nz-select>
 				</div>
@@ -137,17 +136,17 @@
 </div>
 <div class="row">
 	<div class="col-md-12" style="padding:30px" id="endit">
-		<div class="col-md-12">费率表</div> 
 		<div class="row" >
-			<div class="col-md-2" >
-			    <input type="file" id="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" />
-			</div>
-			<div class="col-md-2">
+			
+			<div class="col-md-1">
 				 <button (click)='uploadFile()' class="btn btn-primary">上传</button>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				 <button (click)='dowloadFile()' class="btn btn-primary">下载</button>
-			</div>
+            </div>
+            <div class="col-md-1" >
+                <input type="file" id="file" style="display:none" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" />
+            </div>
 		</div>
 	</div>
 </div>
@@ -155,6 +154,7 @@
 	<div class="col-md-12">
 		<div class="form-group col-md-2">
 			<button class="btn btn-primary" (click)="submit_()" >保存</button>
+			<button class="btn btn-primary" (click)="back_()" >返回上一级</button>
 		</div>
 	</div>
 </div>
