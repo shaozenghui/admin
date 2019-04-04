@@ -58,22 +58,52 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
+        <div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6 control-label">开始时间:</label>
+					<div class="col-md-6">
+            <nz-datepicker [(ngModel)]="start_time" nzShowTime [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'开始时间'"></nz-datepicker>
+					</div>
+        </div>
+        <div class="form-group col-md-6">
+					<label for="" class="text-danger col-md-6   control-label">结束时间:</label>
+					<div class="col-md-6">
+            <nz-datepicker [(ngModel)]="end_time" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
+					</div>
+				</div>
+        <div class="form-group col-md-12"  >
+					<label for="" class="text-danger col-md-3 control-label">城市:</label>
+					<div class="col-md-9">
+            <nz-select style="width: 100%;"
+              [nzMode]="'multiple'"
+              [nzPlaceHolder]="'请选择城市'"
+              [(ngModel)]="cityListSelect"
+              [nzNotFoundContent]="'无法找到'">
+              <nz-option
+                *ngFor="let option of cityList"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+                [nzDisabled]="option.disabled">
+              </nz-option>
+            </nz-select>
+					</div>
+        </div>
+
+        <div class="form-group col-md-12">
+					<label for="" class="text-danger col-md-3 control-label">选择产品:</label>
+					<div class="col-md-9">
+						<nz-select nzAllowClear [nzPlaceHolder]="'选择产品'" [(ngModel)]="brother_id" [nzShowSearch]="true" style="width: 100%;">
+					      <nz-option *ngFor="let option of product_list" [nzLabel]="option.val" [nzValue]="option.id"> </nz-option>
+					    </nz-select>
+					</div>
+        </div>
+        <div class="form-group col-md-6">
 					<label for="" class="text-danger col-md-6 control-label">定期型或终身型:</label>
 					<div class="col-md-6">
 						<select name="select" id="payment_method" class="form-control" [(ngModel)]='guarantee_pattern_select'>
 							<option *ngFor='let item of guarantee_pattern' [value]='item[0]'>{{item[1]}}</option>
 						</select>
 					</div>
-				</div>
-				<div class="form-group col-md-12">
-					<label for="" class="text-danger col-md-3 control-label">选择产品:</label>
-					<div class="col-md-9">
-						<nz-select nzAllowClear [nzPlaceHolder]="'选择产品'" [(ngModel)]="brother_id" [nzShowSearch]="true" style="width: 510px;">
-					      <nz-option *ngFor="let option of product_list" [nzLabel]="option.val" [nzValue]="option.id"> </nz-option>
-					    </nz-select>
-					</div>
-				</div>
+        </div>
 			</div>
 		</div>
 	</div>

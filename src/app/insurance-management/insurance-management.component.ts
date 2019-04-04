@@ -14,13 +14,13 @@ export class InsuranceManagementComponent implements OnInit {
   config;
   _value = '';
   _value2 = '';
-  requestTitle:string = "insuranceManagement";
+  requestTitle: string = "insuranceManagement";
   deleteTitle;
   _current = 1;
    updUrl;
    DownloadUrl;
    DownloadUrl2;
-   fil_suffix:string;
+   fil_suffix: string;
    uploadID = ''
   constructor(
     private titleService:Title,
@@ -28,14 +28,14 @@ export class InsuranceManagementComponent implements OnInit {
     private ser:HttpsService,
     private _message: NzMessageService
   ){}
-  ngOnInit() {   
+  ngOnInit() {
   		this.config = this.route.snapshot.data;
       this.titleService.setTitle(this.config.title);
       if(localStorage.getItem('insurance_select_value2')){
           this._value2 = localStorage.getItem('insurance_select_value2')
           this.ser.searchList_ins(this.requestTitle,this._value,this._value2).subscribe(
              (data)=>{
-               
+
                localStorage.setItem('user_id',data.user_id);
                this._dataSet = data.result;
                if(localStorage.getItem('insurance_nzPageIndex')){
@@ -59,17 +59,17 @@ export class InsuranceManagementComponent implements OnInit {
            }
         )
       }
-      
+
   }
-  public uploader:FileUploader = new FileUploader({     
+  public uploader:FileUploader = new FileUploader({
             method: "POST",
             allowedFileType:["image","xls","video","audio","pdf","compress","doc","ppt"],
-            autoUpload: false,    
+            autoUpload: false,
   });
-   
+
   selectedFileOnChanged(e){
        var that = this;
-       that.updUrl = e.target.value.split('.')[1]; 
+       that.updUrl = e.target.value.split('.')[1];
        that.uploader.queue[0].onSuccess = function (response, status, headers) {
            if (status == 200) {
                that._message.create("success",'上传成功！')
@@ -87,7 +87,7 @@ export class InsuranceManagementComponent implements OnInit {
      that.uploader.onBuildItemForm = function(fileItem,form){
           form.append('file_suffix',that.updUrl)//这个是自己定义的参数
           form.append('user_id',localStorage.getItem('user_id'))
-         
+
      }
   }
   insuranceSearch(){
@@ -122,5 +122,5 @@ export class InsuranceManagementComponent implements OnInit {
        }
     )
   }
-  
+
 }

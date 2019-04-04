@@ -87,7 +87,7 @@ export class RateEditingComponent implements OnInit {
      this.plan_select = this.route.snapshot.queryParams["amount_type"];
      this.plan_max = this.route.snapshot.queryParams["amount_max"];
      this.plan_min = this.route.snapshot.queryParams["amount_min"];
-    
+
     this.ser.getList(this.requestTitle).subscribe(
        (data)=>{
         this.age_min = data.model_condition.age_min;
@@ -110,7 +110,7 @@ export class RateEditingComponent implements OnInit {
     )
 
    }
-   public uploader:FileUploader = new FileUploader({    
+   public uploader:FileUploader = new FileUploader({
         method: "POST",
    });
    selectedFileOnChanged(e){
@@ -122,13 +122,13 @@ export class RateEditingComponent implements OnInit {
         } else {
             that._message.create("error",'上传失败！');
         }
-        
+
       };
       that.uploader.queue[0].upload();
    }
    uploadFile() {
         $('#file').click();
-        this.uploader.options.url = "http://118.89.170.246:8001/api/insuranceManagement/upload_excel/"+localStorage.getItem('user_id') 
+        this.uploader.options.url = "http://118.89.170.246:8001/api/insuranceManagement/upload_excel/"+localStorage.getItem('user_id')
     }
   endit(){
   	this.flag = false;
@@ -145,7 +145,7 @@ export class RateEditingComponent implements OnInit {
      this.ser.getList(DownloadUrl).subscribe(
         (data)=>{
            this.DownloadUrl2 = "http://118.89.170.246"+data.url;
-           window.location.href = this.DownloadUrl2;   
+           window.location.href = this.DownloadUrl2;
         }
      )
   }
@@ -154,8 +154,8 @@ export class RateEditingComponent implements OnInit {
     $('#endit input:checkbox').attr({'disabled':'true'});
     $('#endit input:text').attr({'disabled':'true'});
   	this.exelParams = {
-  		"age_min": this.age_min, 
-  		"age_max": this.age_max, 
+  		"age_min": this.age_min,
+  		"age_max": this.age_max,
       'age_check':'1',
   	}
     if(this.genderCheckbox){
@@ -165,7 +165,7 @@ export class RateEditingComponent implements OnInit {
     if(this.socialCheckbox){
       this.exelParams.social_guarantee_check = '1';
     	this.exelParams.social_guarantee = this.selectedSocialOption;
-      
+
     }
     if(this.gradeCheckbox){
       this.exelParams.career_type_check = '1';
@@ -186,22 +186,22 @@ export class RateEditingComponent implements OnInit {
   	)
   }
   submit_(){
-    this.submit_Params = { 
+    this.submit_Params = {
       "id":this.insId,
       "schedule_id":this.plan_id,
-      "gender":this.selectedGenderOption ,  
-      "social_guarantee": this.selectedSocialOption,   
-      "age_min": this.age_min.toString(), 
+      "gender":this.selectedGenderOption ,
+      "social_guarantee": this.selectedSocialOption,
+      "age_min": this.age_min.toString(),
       "age_max": this.age_max.toString(),
-      "career_type": this.selectedGradeleOption,   
+      "career_type": this.selectedGradeleOption,
       "guarantee_period": this.selectedPeriodOption,
-      "payment_period": this.selectedPaymentOption,   
+      "payment_period": this.selectedPaymentOption,
     }
     this.ser.updateSubmit(this.requestTitle,this.submit_Params).subscribe(
        (data)=>{
            if(data.code == '200'){
             this._message.create("success",'保存成功！');
-             
+
           }else{
             this._message.create("error",'保存失败！')
           }
@@ -209,7 +209,7 @@ export class RateEditingComponent implements OnInit {
     )
   }
   back_(){
-      window.history.back(); 
+      window.history.back();
   }
 }
 

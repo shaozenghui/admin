@@ -46,6 +46,10 @@ export class InsuranceManagementCreateComponent implements OnInit {
   product_list = [];
   state_select;
   brother_id = '';
+  start_time = '';
+  end_time = '';
+  cityList = [];
+  cityListSelect = [];
   constructor(
     private titleService:Title,
     private route:ActivatedRoute,
@@ -67,23 +71,35 @@ export class InsuranceManagementCreateComponent implements OnInit {
       this.createTitle = "insuranceManagement/create";
       this.updateTitle = "insuranceManagement/"+this.route.snapshot.queryParams["id"]+"/update/";
     }
-      this.ckeConfig = {
-        allowedContent: true,
-        extraPlugins: 'divarea'
-      };
+    this.ckeConfig = {
+      allowedContent: true,
+      extraPlugins: 'divarea'
+    };
   	 this.config = this.route.snapshot.data;
   	 this.titleService.setTitle(this.config.title);
      this.sign = this.route.snapshot.queryParams["sign"];
      if(this.sign == "change"){
        this.ser.update(this.updateTitle).subscribe(
          (data)=>{
+          for (var key in data.city_list) {
+            this.cityList.push({
+              value:Number(key),
+              label:data.city_list[key]
+            })
+          }
            for(var key in data.product_list){
              this.product_list.push({
                id:Number(key),
                val:data.product_list[key]
              })
            }
+          data.model.city_list.forEach((item, index) => {
+            this.cityListSelect.push(...item)
+          })
            this.brother_id = data.model.brother_id;
+           this.start_time = data.model.start_time;
+           this.end_time = data.model.end_time;
+
            // 状态
              this.state_select = data.model.is_active;
            // 险种
@@ -99,7 +115,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
            // 保险公司选中的
            this.insurers_id = data.model.insurer_id ;
            this.insurers_name = data.model.insurer_id;
-          
+
 
            this.score =  data.model.score;
            this.insurname = data.model.name;
@@ -110,7 +126,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
            // 定期型
             this.guarantee_pattern = data.guarantee_pattern;
            this.guarantee_pattern_select = data.model.guarantee_pattern;
-           
+
            // 支付方式
            this.payment_method = this.category[data.model.category_type - 1 ][2];
            this.payment_method_select = data.model.payment_method;
@@ -118,7 +134,14 @@ export class InsuranceManagementCreateComponent implements OnInit {
        )
      }else{
            this.ser.getCity(this.requestTitle).subscribe(
-              (data)=>{
+              (data) => {
+
+                for (var key in data.city_list) {
+                  this.cityList.push({
+                    value:Number(key),
+                    label:data.city_list[key]
+                  })
+                }
                 for(var key in data.product_list){
                   this.product_list.push({
                     id:Number(key),
@@ -140,7 +163,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
 
                  this.category_ = data.category[0][1];
                  this.category_select = data.category[0][1][0][0];
-                
+
                  this.category_type_select = data.category_type[0][0];
 
                  this.payment_method = data.category[0][2];
@@ -151,8 +174,22 @@ export class InsuranceManagementCreateComponent implements OnInit {
            )
      }
   }
-
-  insurers_(){
+  dateFrom(date){
+    function formatTen(num) {
+      return num > 9 ? (num + '') : ('0' + num)
+    }
+    if (date) {
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var day = date.getDate()
+      var hour = date.getHours()
+      var minute = date.getMinutes()
+      var second = date.getSeconds()
+      // return year + '-' + formatTen(month) + '-' + formatTen(day)
+      return  year + formatTen(month) + formatTen(day)
+    } else return ''
+  }
+  insurers_() {
      this.insurers_id = $('#insurers option:selected').val();
   }
   changeCategory_type(e){
@@ -160,7 +197,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
     this.category_ = this.category[e.target.value -1 ][1]
     this.category_select = this.category_[0][0];
   }
-  submit_1(){
+  submit_1() {
   	 this.createParamsObj = {
   	    "name": this.insurname ,
   	    "insurer_id": this.insurers_id ,
@@ -172,14 +209,20 @@ export class InsuranceManagementCreateComponent implements OnInit {
         "policy_pattern":this.policy_pattern_select,
         "guarantee_pattern":this.guarantee_pattern_select,
         "is_active":this.state_select,
-        "brother_id":this.brother_id
-  	 }
-
+        "brother_id":this.brother_id,
+        "start_time":this.dateFrom(this.start_time) ,
+        "end_time": this.dateFrom(this.end_time) ,
+        "city": this.cityListSelect
+     }
      if(this.insurname == ''){
         this._message.create("error",'名称为必填项！');
      }else if(this.score == undefined){
         this._message.create("error",'评分为必填项！')
-     }else{
+     }else if(!this.start_time){
+          this._message.create("error",'开始时间为必填项！');
+      }else if(!this.end_time){
+        this._message.create("error",'结束时间为必填项！')
+      }else{
          this.ser.updateSubmit(this.createTitle,this.createParamsObj).subscribe(
             (data)=>{
              if(data.code == '200'){
@@ -188,7 +231,7 @@ export class InsuranceManagementCreateComponent implements OnInit {
             }
          )
      }
-  	 
+
   };
   submit_2(){
      this.updateParamsObj = {
@@ -202,13 +245,20 @@ export class InsuranceManagementCreateComponent implements OnInit {
         "policy_pattern":this.policy_pattern_select,
         "guarantee_pattern":this.guarantee_pattern_select,
         "is_active":this.state_select,
-        "brother_id":this.brother_id
+        "brother_id":this.brother_id,
+        "start_time":this.dateFrom(new Date(this.start_time)) ,
+        "end_time":this.dateFrom(new Date(this.end_time)) ,
+        "city": this.cityListSelect
      }
      if(this.insurname == ''){
         this._message.create("error",'名称为必填项！');
      }else if(this.score == undefined){
         this._message.create("error",'评分为必填项！')
-     }else{
+     }else if(!this.start_time){
+      this._message.create("error",'开始时间为必填项！');
+      }else if(!this.end_time){
+        this._message.create("error",'结束时间为必填项！')
+      }else{
        this.ser.updateSubmit(this.updateTitle,this.updateParamsObj).subscribe(
           (data)=>{
            if(data.code == '200'){

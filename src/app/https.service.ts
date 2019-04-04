@@ -16,7 +16,7 @@ export class HttpsService {
     private _message: NzMessageService) {
     this.token =  localStorage.getItem('token');
   }
- 
+
    // 登录
   login(obj){
      localStorage.setItem('username',obj.username);
@@ -25,7 +25,7 @@ export class HttpsService {
       {headers:new HttpHeaders().set("Access-Control-Allow-Origin", "*")
      }).subscribe(
          (data)=>{
-  
+
             if(data['code'] == '200'){
                localStorage.setItem('token',data['token']);
                this.router.navigate(['/admin']);
@@ -37,7 +37,7 @@ export class HttpsService {
          }
       );
   }
-  
+
   // 获取列表
   getList(obj):Observable<any>{
     let url:string = "http://118.89.170.246:8001/api/"+obj;
@@ -98,7 +98,7 @@ export class HttpsService {
  }
 
  // 保险管理删除
- 
+
   delete_(title):Observable<any>{
     let url:string = "http://118.89.170.246:8001/api/"+title;
     return this.http.get(url,

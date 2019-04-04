@@ -1,0 +1,4 @@
+.ant-select-selection--multiple{
+  max-height: 34px !important;
+  overflow: hidden !important;
+}
